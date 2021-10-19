@@ -22,6 +22,17 @@ jobs:
         with:
           name: build_folder
           path: ./build
+  test:
+    name: Test
+    runs-on: ubuntu-20.04
+    needs: build
+    steps:
+    - name: Qodana - Code Inspection
+      uses: JetBrains/qodana-action@v2.2.1-eap
+    - name: Qodana - Clone Finder
+      uses: JetBrains/qodana-clone-finder-action@v2.0-eap  
+    - name: Qodana - License Audit
+      uses: JetBrains/qodana-license-audit-action@v2.0-eap  
   push:
     name: Push
     runs-on: ubuntu-20.04
